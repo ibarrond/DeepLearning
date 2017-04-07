@@ -25,21 +25,21 @@ class NNet(object):
         self.tf = tf                    #transfer_function
         self.dtf = dtf                  #derivative of transfer_function
         self.n_layers = len(netDims)    #Number of layers, including I/O
-        self.n_input = n_input + 1      #Dimension of Input Layer, with bias neuron
-        self.netDims = netDims          #Dimension of layers, including output
+        self.netDims = netDims          
         
-        # initialize
-        self.W = [[] for i in range(self.n_layers)]     #Empty list for arrays of weights
-        self.dEdU = [[] for i in range(self.n_layers)]     #Empty list for arrays of partial error derivatives
+        # initialize Lists
+        self.W = [[] for i in range(self.n_layers)]      #Empty list for arrays of weights
+        self.dEdU = [[] for i in range(self.n_layers)]   #Empty list for arrays of partial error derivatives
 
         # adding extra neurons for bias
-        self.netDims = [ x+1 for x in netDims]
-        self.netDims[-1] -= 1           #Output layer doesn't need bias neuron
+        self.n_input = n_input + 1             #Dimension of Input Layer, with bias neuron
+        self.netDims = [ x+1 for x in netDims] #Dimension of layers, including output
+        self.netDims[-1] -= 1                  #Output layer doesn't need bias neuron
 
         # set up arrays of 1s for activations
         self.input = np.ones(self.n_input)
         self.values = [np.ones(layer_dim) for layer_dim in self.netDims]
-        self.output = np.ones(self.netDims[-1])
+        self.output = self.values[-1]
         
         #create randomized weights Yann Lecun method in 1988's paper ( Default values)
         input_range = 1.0 / self.netDims[0] ** (1/2)
@@ -54,13 +54,13 @@ class NNet(object):
    
     def feedForward(self, inputs):
         # Set input, leaving bias neuron untouched. Compute first activation
-        self.input[0:self.n_input-1] = inputs
-        self.values[0] = self.tf(np.append(np.dot(self.input, self.W[0]), 1.0))
+        self.input = np.append(inputs, 1.0)
+        self.values[0] = np.append(self.tf(np.dot(self.input, self.W[0])), 1.0)
 
         #Compute  hidden activations, all hidden layers except last one (output)
         for layer in range(1, self.n_layers-1):
-            self.values[layer] = self.tf( np.append(
-                np.dot (self.values[layer-1], self.W[layer]) , 1.0 ) )
+            self.values[layer] = np.append(          self.tf( 
+                np.dot (self.values[layer-1], self.W[layer]) ) , 1.0 )
 
         # Compute output activations, without append since there is no bias neuron
         self.values[-1] = self.tf(np.dot(self.values[-2], self.W[-1]))
