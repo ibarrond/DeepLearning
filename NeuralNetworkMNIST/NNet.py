@@ -70,10 +70,11 @@ class NNet(object):
     
     def backPropagate(self, targets):
         self.dEdU[-1] = (self.output-targets)*self.dtf(self.output)
-
+        self.dEdU[-2] = np.multiply(np.dot(self.W[-1],self.dEdU[-1]),\
+                                       self.dtf(self.values[-2]))
         # calculate error terms for hidden layers
-        for layer in range(self.n_layers-1, 0, -1):
-            self.dEdU[layer-1] = np.multiply(np.dot(self.W[layer],self.dEdU[layer]),\
+        for layer in range(self.n_layers-2, 0, -1):
+            self.dEdU[layer-1] = np.multiply(np.dot(self.W[layer],self.dEdU[layer][:-1]),\
                                            self.dtf(self.values[layer-1]))
 
         # update network weights
