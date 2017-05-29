@@ -1,8 +1,9 @@
 # DeepLearning
 ----------
 The objective of this repository is to implement a collection of Deep Learning approaches, starting from simple Neural Network architectures and pursuing with contemporary and state of the art practices and models.  
+
 | Notebook | Description |
-|----------|-------------|
+|----------|------------------------------------------------------------------|
 |NeuralNetwork_MNIST| **NNet** class implementation from scratch, allowing for flexible definition and training/evaluation of conventional neural networks (MLP).|
 |ConvolutionalNN_MNIST| **CNNet** function implementation based on Tensorflow, implementing a generalized model to use such library as well as the LeNet5 model. |
 
