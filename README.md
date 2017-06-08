@@ -1,6 +1,6 @@
 # DeepLearning
 ----------
-The objective of this repository is to implement a collection of Deep Learning approaches, starting from simple Neural Network architectures and pursuing with contemporary and state of the art practices and models.  
+Collection of Deep Learning approaches, starting from simple Neural Network architectures and pursuing with contemporary and state-of-the-art practices and models.  
 
 | Notebook | Description |
 |----------|------------------------------------------------------------------|
@@ -18,6 +18,10 @@ All notebooks follow a general structure:
 * _Language_: Python over Jupyter Notebooks.
 * _Execution_: local in a PC with Anaconda
 * _Libraries_: tensorflow, numpy, matplotlib
+
+## Authors 
+* Luca Benedetto @lucabenedetto
+* Alberto Ibarrondo Luis @ibarrond
 
 ## Motivation
 Deep Learning is a new approach in Machine Learning which allows to build models that have shown superior performance fora wide range of applications, in particular Computer Vision and Natural Language Processing. Thanks to the joint availability of large data corpus and affordable processing power, Deep Learning has revived the old field  of Artificial Neural Networks and provoked the "Renaissance" of AI (Artificial Intelligence).  The present notebooks will address this topic, implementing from scratch and using well known libraries, Deep Neural Networks.
